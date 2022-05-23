@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const MAX_UPLOAD_SIZE = 1024 * 1024 // 1MB
+const MAX_UPLOAD_SIZE = 1024 * 1024 * 100 // 100MB
 
 // Progress is used to track the progress of a file upload.
 // It implements the io.Writer interface so it can be passed
@@ -62,7 +62,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, fileHeader := range files {
 		if fileHeader.Size > MAX_UPLOAD_SIZE {
-			http.Error(w, fmt.Sprintf("The uploaded image is too big: %s. Please use an image less than 1MB in size", fileHeader.Filename), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("The uploaded image is too big: %s. Please use an image less than 100MB in size", fileHeader.Filename), http.StatusBadRequest)
 			return
 		}
 
